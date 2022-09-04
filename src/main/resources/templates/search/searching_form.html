@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Searching</title>
+
+    <style>
+        input {
+            display: block;
+            font-size: 18px;
+            padding: 15px;
+            margin-bottom: 10px;
+            outline: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        select {
+            display: block;
+            font-size: 24px;
+            padding: 15px;
+            margin-bottom: 5px;
+            outline: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            height: 50px;
+            box-sizing: border-box;
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        select:hover {
+            color: black;
+            background-color: lightgray;
+        }
+
+        form {
+            font-size: 24px;
+            width: 90%;
+            margin-top:10%;
+            margin-bottom: 50px;
+            min-width: 250px;
+            max-width: 350px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 15px;
+            padding-bottom: 5px;
+        }
+
+        body {
+            width: 100%;
+            height: 2000px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: ghostwhite;
+        }
+
+        .btn {
+            display: block;
+            width: 250px;
+            text-align: center;
+            background-color: lightgray;
+            text-decoration: none;
+            font-size: 24px;
+            color: black;
+            margin-top: 30px;
+            padding: 5px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+        .btn:hover {
+            color: whitesmoke;
+            background-color: dimgrey;
+        }
+
+        .submit {
+            background-color: lightgray;
+            color: black;
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+        .submit:hover {
+            color: whitesmoke;
+            background-color: dimgrey;
+        }
+
+        .placeholder {
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="placeholder"></div>
+
+<form th:method="GET" th:action="@{/search/index}">
+
+    <label for="loc">Локация:</label>
+    <select name="location_id" id="loc">
+        <option th:each="loc : ${locations}" th:value="${loc.getId()}" th:text="${loc.getName()}">[location]</option>
+    </select>
+
+    <br/>
+
+    <label for="rare">Редкость:</label>
+    <select name="rareness" id="rare">
+        <option value="Обычный">Обычный</option>
+        <option value="Необычный">Необычный</option>
+        <option value="Редкий">Редкий</option>
+        <option value="Очень редкий">Очень редкий</option>
+    </select>
+
+    <br/>
+
+    <label for="cnt">Количество:</label>
+    <input name="count" type="text" id="cnt"/>
+
+    <br/>
+
+    <input type="submit" value="Найти" class="submit"/>
+</form>
+
+<a th:href="@{/plants}" class="btn">Список всех растений</a>
+<a th:href="@{/locations}" class="btn">Список всех локаций</a>
+<a th:href="@{/plants/new}" class="btn">Добавить растение</a>
+<a th:href="@{/locations/new}" class="btn">Добавить локацию</a>
+
+<form th:action="@{/logout}" th:method="POST" class="btn">
+    <input type="submit" value="Logout"/>
+</form>
+
+
+
+<div class="placeholder"></div>
+</body>
+</html>

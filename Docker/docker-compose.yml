@@ -1,0 +1,30 @@
+version: '3.6'
+
+services:
+  db:
+    image: 'postgres:13'
+    container_name: db
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_USER=docker_user
+      - POSTGRES_PASSWORD=6037845
+      - POSTGRES_DB=plants_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+
+  app:
+    container_name: app
+    image: docker-spring-boot-postgres:latest
+    build:
+      context: .
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/plants_db
+      - SPRING_DATASOURCE_USERNAME=docker_user
+      - SPRING_DATASOURCE_PASSWORD=6037845
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"

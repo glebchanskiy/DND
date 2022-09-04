@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All plants</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: ghostwhite;
+        }
+        .plant {
+            display: block;
+            text-align: center;
+            justify-content: center;
+            width: 400px;
+            height: auto;
+            /*margin-left: auto;*/
+            /*margin-right: auto;*/
+            margin-bottom: 10px;
+            border: 1px solid darkolivegreen;
+            border-radius: 4px;
+        }
+
+        .plant a {
+            text-decoration: none;
+            color: dimgrey;
+            font-size: 24px;
+        }
+
+        .plant-inner {
+            display: block;
+            padding: 10px 0;
+        }
+
+        .btn {
+            display: block;
+            background-color: lightgray;
+            text-decoration: none;
+            font-size: 24px;
+            color: black;
+            margin-top: 30px;
+            padding: 5px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+        .btn:hover {
+            color: whitesmoke;
+            background-color: dimgrey;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Игрок нашёл:</h1>
+<div th:each="plant : ${plants}" class="plant">
+    <a th:href="@{/plants/{id}(id=${plant.getId()})}">
+        <p th:text="${plant.getName()}" class="plant-inner">[plant]</p>
+    </a>
+</div>
+
+<a th:href="@{/search}" class="btn">Назад к меню</a>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+            width: 100%;
+            height: 2000px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: ghostwhite;
+        }
+        .plant_info {
+            margin-top: 5%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 450px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        .plant_info div {
+            background-color: gainsboro;
+            padding:  0 15px;
+            margin: 10px;
+            font-size: 18px;
+            width: auto;
+        }
+
+        .plant_info p {
+            display: block;
+            text-align: justify;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 6px 0;
+        }
+        .plant_info p span {
+            font-weight: normal;
+
+        }
+
+        .plant_info-name p{
+            font-size: 36px;
+        }
+
+        .placeholder {
+            height: auto;
+        }
+        .btn {
+            display: block;
+            width: 250px;
+            text-decoration: none;
+            background-color: lightgray;
+            font-size: 24px;
+            color: black;
+            margin-top: 30px;
+            padding: 5px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+        .btn:hover {
+            color: whitesmoke;
+            background-color: dimgrey;
+        }
+    </style>
+</head>
+<body>
+
+<div class="placeholder"></div>
+<div class="plant_info">
+
+    <div class="plant_info-name">
+        <p th:utext="${plant.getName()}">[Название растения]</p>
+    </div>
+
+    <div class="plant_info-rare">
+        <p>Редкость:  <span th:utext="${plant.getRareness()}">[Редкость]</span></p>
+    </div>
+
+    <div class="plant_info_locs">
+        <p> Локации:
+            <span th:each="loc : ${plant.getLocations()}" >
+                <span th:text="${loc.getName()}" class="plant_info_locs-loc">[loc]</span>
+                <span> </span>
+            </span>
+       </p>
+    </div>
+
+    <div class="plant_info_features">
+        <p>Особенности:  <span th:utext="${plant.getFeature()}">[Особенности]</span></p>
+    </div>
+
+    <div class="plant_info_diff">
+        <p>Сложность:  <span th:utext="${plant.getDifficult()}">[Сложность]</span></p>
+    </div>
+
+    <div class="plant_info_desc">
+        <p>Описание:  <span th:utext="${plant.getDescription()}">[Описание]</span></p>
+    </div>
+</div>
+
+<!--<a th:href="@{/plants/{id}/edit(id=${plant.getId()})}" class="btn">Редактировать</a>-->
+
+<form th:method="GET" th:action="@{/plants/{id}/edit(id=${plant.getId()})}" >
+    <input type="submit" value="Редактировать" class="btn">
+</form>
+
+<form th:method="DELETE" th:action="@{/plants/{id}(id=${plant.getId()})}" >
+    <input type="submit" value="Удалить" class="btn">
+</form>
+
+<div class="placeholder"></div>
+
+</body>
+</html>

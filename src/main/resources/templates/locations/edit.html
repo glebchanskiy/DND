@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create new Plant</title>
+
+  <style>
+    .input {
+      display: block;
+      font-size: 18px;
+      padding: 15px;
+      margin-bottom: 10px;
+      outline: none;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    select {
+      display: block;
+      font-size: 18px;
+      padding: 15px;
+      margin-bottom: 10px;
+      outline: none;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    form {
+      width: 90%;
+      margin-top:5%;
+      min-width: 250px;
+      max-width: 350px;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      padding: 15px;
+      padding-bottom: 5px;
+    }
+
+    body {
+      width: 100%;
+      height: 2000px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      background-color: ghostwhite;
+    }
+    .placeholder {
+      height: auto;
+    }
+    .submit {
+      background-color: lightgray;
+      color: black;
+      -webkit-transition: all 0.5s ease;
+      transition: all 0.5s ease;
+    }
+    .submit:hover {
+      color: whitesmoke;
+      background-color: dimgrey;
+    }
+  </style>
+</head>
+<body>
+
+<div class="placeholder"></div>
+<form th:method="PATCH" th:action="@{/locations/{id}(id=${location.getId()})}" th:object="${location}">
+  <label for="name">Plant name</label>
+  <input type="text" th:field="*{name}" id="name" class="input"/>
+
+  <br/>
+
+  <input type="submit" value="Сохранить" class="input submit"/>
+</form>
+<div class="placeholder"></div>
+</body>
+</html>

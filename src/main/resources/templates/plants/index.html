@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All plants</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: ghostwhite;
+        }
+        .plant {
+            display: block;
+            text-align: center;
+            justify-content: center;
+            width: 400px;
+            height: auto;
+            /*margin-left: auto;*/
+            /*margin-right: auto;*/
+            margin-bottom: 10px;
+            border: 1px solid darkolivegreen;
+            border-radius: 4px;
+        }
+
+        .plant a {
+            text-decoration: none;
+            color: dimgrey;
+            font-size: 24px;
+        }
+
+        .plant-inner {
+            display: block;
+            padding: 10px 0;
+        }
+
+        .btn {
+            display: block;
+            width: 250px;
+            text-align: center;
+            background-color: lightgray;
+            text-decoration: none;
+            font-size: 24px;
+            color: black;
+            margin-top: 30px;
+            padding: 5px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+        .btn:hover {
+            color: whitesmoke;
+            background-color: dimgrey;
+        }
+        .btn_outer {
+            margin-bottom: 40px;
+        }
+        input {
+            display: block;
+            font-size: 16px;
+            padding: 15px;
+            margin-bottom: 10px;
+            outline: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="btn_outer">
+    <a th:href="@{/plants/new}" class="btn">Добавить</a>
+    <a th:href="@{/search}" class="btn">К меню</a>
+    </div>
+
+    <form th:action="@{plants}">
+        <label for="search">Поиск растения</label>
+        <input type="text" name="start_with" id="search">
+    </form>
+
+    <h1>Список всех растений</h1>
+
+    <div th:each="plant : ${plants}" class="plant">
+        <a th:href="@{/plants/{id}(id=${plant.getId()})}">
+            <p th:text="${plant.getName()}" class="plant-inner">[plant]</p>
+        </a>
+    </div>
+
+    <div th:if="${plants.isEmpty()}">
+        <h3>Cписок пуст...</h3>
+    </div>
+
+
+
+
+</body>
+</html>

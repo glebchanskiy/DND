@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+            width: 100%;
+            height: 2000px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: ghostwhite;
+        }
+        .plant_info {
+            margin-top: 5%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 450px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        .plant_info div {
+            background-color: gainsboro;
+            padding:  0 15px;
+            margin: 10px;
+            font-size: 18px;
+            width: auto;
+        }
+
+        .plant_info p {
+            display: block;
+            text-align: justify;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 6px 0;
+        }
+        .plant_info p span {
+            font-weight: normal;
+
+        }
+
+        .plant_info-name p{
+            font-size: 36px;
+        }
+
+        .placeholder {
+            height: auto;
+        }
+        .btn {
+            display: block;
+            width: 250px;
+            text-decoration: none;
+            background-color: lightgray;
+            font-size: 24px;
+            color: black;
+            margin-top: 30px;
+            padding: 5px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+        .btn:hover {
+            color: whitesmoke;
+            background-color: dimgrey;
+        }
+        ul {
+            padding: 5px 15px;
+            margin: 0;
+        }
+        ul li {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="placeholder"></div>
+<div class="plant_info">
+
+    <div class="plant_info-name">
+        <p th:utext="${location.getName()}">[Название локации]</p>
+    </div>
+
+    <div class="plant_info_locs">
+        <p> Растения:</p>
+        <ul>
+            <li th:each="plant : ${location.getPlants()}" th:text="${plant.getName()}" class="plant_info_locs-loc">[loc]</li>
+        </ul>
+
+    </div>
+</div>
+
+<form th:method="GET" th:action="@{/locations/{id}/edit(id=${location.getId()})}" >
+    <input type="submit" value="Редактировать" class="btn">
+</form>
+
+<form th:method="DELETE" th:action="@{/locations/{id}(id=${location.getId()})}" >
+    <input type="submit" value="Удалить" class="btn">
+</form>
+
+<div class="placeholder"></div>
+
+</body>
+</html>

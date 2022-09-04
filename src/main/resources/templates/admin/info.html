@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All location</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        td {
+            border:1px solid black;
+            text-align: center;
+        }
+        th {
+            border:1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<table>
+    <caption>Plants</caption>
+    <thead>
+    <tr>
+        <th> Id </th>
+        <th> Name </th>
+        <th> Rareness </th>
+        <th> Difficult </th>
+        <th> Feature </th>
+        <th> Description </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${plants.isEmpty()}">
+        <td colspan="2"> No Plants Available </td>
+    </tr>
+    <tr th:each="plant : ${plants}">
+        <td><span th:text="${plant.getId()}"> id </span></td>
+        <td><span th:text="${plant.getName()}"> name </span></td>
+        <td><span th:text="${plant.getRareness()}"> rareness </span></td>
+        <td><span th:text="${plant.getDifficult()}"> difficult </span></td>
+        <td><span th:text="${plant.getFeature()}"> feature </span></td>
+        <td><span th:text="${plant.getDescription()}"> description </span></td>
+    </tr>
+    </tbody>
+</table>
+
+<br><br>
+
+<table>
+    <caption>Locations</caption>
+    <thead>
+    <tr>
+        <th> Id </th>
+        <th> Name </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${locations.isEmpty()}">
+        <td colspan="2"> No Locations Available </td>
+    </tr>
+    <tr th:each="loc : ${locations}">
+        <td><span th:text="${loc.getId()}"> id </span></td>
+        <td><span th:text="${loc.getName()}"> name </span></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

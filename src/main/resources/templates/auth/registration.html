@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login page</title>
+
+    <style>
+        input {
+            display: block;
+            font-size: 18px;
+            padding: 15px;
+            margin-bottom: 10px;
+            outline: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        form {
+            width: 90%;
+            margin-top:10%;
+            min-width: 250px;
+            max-width: 350px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 15px;
+            padding-bottom: 5px;
+        }
+
+        body {
+            width: 100%;
+            height: 2000px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: ghostwhite;
+        }
+
+        .submit {
+            background-color: lightgray;
+            color: black;
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+        .submit:hover {
+            color: whitesmoke;
+            background-color: dimgrey;
+        }
+
+    </style>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/auth/registration}" th:object="${person}">
+    <label for="username">Введите имя пользователя: </label>
+    <input type="text" th:field="*{username}" id="username">
+    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+    <br>
+
+    <label for="password">Введите пароль: </label>
+    <input type="password" th:field="*{password}" id="password">
+    <br>
+
+    <input type="submit" value="Login" class="submit">
+
+
+</form>
+
+
+
+
+</body>
+
+</html>
